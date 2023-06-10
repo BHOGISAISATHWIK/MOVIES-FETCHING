@@ -166,25 +166,25 @@ ul{
   margin-top: 100px;
   margin-left: 70px;
   font-size: large;
-  padding-left: 15px;
+  padding-left: 35px;
   padding-right: 40px;
   width: 120px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   font-weight: 400;
   font-family: verdana;
   background:rgba(68, 67, 67, 0.966);
   border-color: none;
   border-style: none;
-  text-shadow: 2px 4px 10px #000000;
+  text-shadow: 2px 2px 4px #000000;
   box-shadow:2px 2px 5px #514949;
 }
 
 .side .add:hover{
   width: 130px;
   height: 45px;
-  padding-left: 20px;
+  padding-left: 35px;
   margin-left: 60px;
   margin-top: 95px;
   text-shadow: 2px 2px 4px #bfb9b9;
