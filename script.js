@@ -8,6 +8,7 @@ let API_URL = BASE_URL + MID +PAGE+ API_KEY;
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 
+//fetching 'ind' number of pages from a given API_URL from MID
 const fet=(ind) =>{  
     for(num=1;num<=ind;num++){
         PAGE=`${num}&`;
@@ -40,71 +41,10 @@ const fet=(ind) =>{
 
 fet(1);
 
-const newMovies=() =>{
-    console.log('clicked');
-    MID= '/movie/now_playing?language=en-US&page=';
-    document.getElementById('menus').innerHTML=`<div class="heading">
-                                                        NOW PLAYING
-                                                </div>
-                                                <div id="menu">
-                                                </div>`;
-    var container = document.getElementById('menu');
-    container.innerHTML = null;
-    fet(5);
-}
+const fetchTv=()=>{
 
-const popMovies=() =>{
-    console.log('clicked');
-    MID='/movie/popular?language=en-US&page=';
-    document.getElementById('menus').innerHTML=`<div class="heading">
-                                                    POPULAR MOVIES
-                                                </div>
-                                                <div id="menu">
-                                                </div>`;
-    var container = document.getElementById('menu');
-    container.innerHTML = null;
-    fet(5);
-}
-
-const topMovies=()=>{
-    console.log('clicked');
-    MID= '/movie/top_rated?language=en-US&page=1&';
-    document.getElementById('menus').innerHTML=`<div class="heading">
-                                                    TOP RATED MOVIES
-                                                </div>
-                                                <div id="menu">
-                                                </div>`;
-    var container = document.getElementById('menu');
-    container.innerHTML = null;
-
-    fet(7);
-}
-
-const upMovies= () =>{
-    console.log('clicked');
-    MID='/movie/upcoming?language=en-US&page=';
-    document.getElementById('menus').innerHTML=`<div class="heading">
-                                                    UP COMING MOVIES
-                                                </div>
-                                                <div id="menu">
-                                                </div>`;
-    var container = document.getElementById('menu');
-    container.innerHTML = null;
-    fet(3);
-}
-
-const tv =() =>{
-    console.log('clicked');
-    API_URL=BASE_URL + '/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&sort_by=vote_count.desc&page=1&' + API_KEY;
-    document.getElementById('menus').innerHTML=`<div class="heading">
-                                                    TV SHOWS
-                                                </div>
-                                                <div id="menu">
-                                                </div>`;
-    var container = document.getElementById('menu');
-    container.innerHTML = null;
-    fetch(API_URL)
-    .then((response) => {
+    fetch(API_URL)//cannot use the regular fet() function here because the attribute name in TV shows from website is not default 
+    .then((response) => {       // original_title..its original_name so had to write the entire function again
         console.log(response);
         return response.json();
     }).then((data) => {
@@ -129,18 +69,91 @@ const tv =() =>{
     })
 }
 
-// 'https://api.themoviedb.org/3/search/movie?query=extract&include_adult=false&language=en-US&page=1&'
+
+//function for NEW MOVIES filter 
+const newMovies=() =>{
+    console.log('clicked');
+    MID= '/movie/now_playing?language=en-US&page='; //API for new movies from tdmb
+    document.getElementById('menus').innerHTML=`<div class="heading"> 
+                                                        NOW PLAYING
+                                                </div>
+                                                <div id="menu">
+                                                </div>`;//refreshing the MENUS id
+    var container = document.getElementById('menu');
+    container.innerHTML = null;//clearing the previous results
+    fet(5);//fetches 5 pages
+}
+
+//function for POPULAR MOVIES filter 
+const popMovies=() =>{
+    console.log('clicked');
+    MID='/movie/popular?language=en-US&page='; //corresponding API 
+    document.getElementById('menus').innerHTML=`<div class="heading">
+                                                    POPULAR MOVIES
+                                                </div>
+                                                <div id="menu">
+                                                </div>`; //refreshing menus id
+    var container = document.getElementById('menu');
+    container.innerHTML = null;//clearing the previous results
+    fet(5); //fetches five pages
+}
+
+//function for TOP rated movies fetching
+const topMovies=()=>{
+    console.log('clicked');
+    MID= '/movie/top_rated?language=en-US&page=1&';
+    document.getElementById('menus').innerHTML=`<div class="heading">
+                                                    TOP RATED MOVIES
+                                                </div>
+                                                <div id="menu">
+                                                </div>`;
+    var container = document.getElementById('menu');
+    container.innerHTML = null;//clearing the previous results
+
+    fet(7);//fetches seven pages
+}
+
+//function for upcoming movies
+const upMovies= () =>{
+    console.log('clicked');
+    MID='/movie/upcoming?language=en-US&page=';
+    document.getElementById('menus').innerHTML=`<div class="heading">
+                                                    UP COMING MOVIES
+                                                </div>
+                                                <div id="menu">
+                                                </div>`;
+    var container = document.getElementById('menu');
+    container.innerHTML = null;//clearing the previous results
+    fet(3);
+}
+
+//function for fetching TV SHOWS
+const tv =() =>{
+    console.log('clicked');
+    API_URL=BASE_URL + '/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&sort_by=vote_count.desc&page=1&' + API_KEY;
+    document.getElementById('menus').innerHTML=`<div class="heading">
+                                                    TV SHOWS
+                                                </div>
+                                                <div id="menu">
+                                                </div>`;
+    var container = document.getElementById('menu');
+    container.innerHTML = null;
+    fetchTv();
+}
+
+//search functionaility
 
 const search_movie=()=>{
     
-        let query=document.getElementById('query').value;
+        let query=document.getElementById('query').value; //getting the input value entered in the form
     
+        //using tdmb's searching API url for searching
         API_URL=`https://api.themoviedb.org/3/search/movie?query=`+query+`&include_adult=false&language=en-US&page=1&`+API_KEY;
 
         document.getElementById('menus').innerHTML=` <div id="menu"></div>`;
-        var container = document.getElementById('menu');
+        var container = document.getElementById('menu'); //clearing the previous data
         container.innerHTML = null;
-        fetch(API_URL)
+        fetch(API_URL) //fetching data
         .then((response) => {
             console.log(response);
             return response.json();
