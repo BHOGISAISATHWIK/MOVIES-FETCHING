@@ -64,6 +64,10 @@ padding-inline-start: 58px;
   font-weight: 700;
 }
 
+.topnav input:focus{
+  outline: none;
+}
+
 input::placeholder{
   color: rgb(24, 24, 24);
   font-weight: 400;
