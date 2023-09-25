@@ -40,7 +40,7 @@ Welcome to the Movies website! This web application allows users to Discover the
 1. Clone the repository:
 
 ```javascript
-git clone https://github.com/saisanthoshbussa/Movies-Website
+git clone https://github.com/BHOGISAISATHWIK/MOVIES-FETCHING
 ```
 
 2. Open the project in your preferred code editor.
